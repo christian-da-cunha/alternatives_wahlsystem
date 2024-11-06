@@ -11,18 +11,18 @@ punkte_verteilung = []
 
 # Farbenliste für die Parteien
 farben = [
-    "#87CEEB",  # ÖVP - Türkis
-    "#CC0000",  # SPÖ - Rot
-    "#0E49B5",  # FPÖ - Blau
-    "#6AB023",  # GRÜNE - Grün
-    "#E91E63",  # NEOS - Pink
-    "#000000",  # BIER - Gelb
-    "#00B7EB",  # MFG - Türkis
-    "#87CEEB",  # BGE - Hellblau
-    "#FF6600",  # LMP - Orange
-    "#808080",  # GAZA - Grau
-    "#B22222",  # KPÖ - Dunkelrot
-    "#696969"   # KEINE - Dunkelgrau
+    "#61c3ce",  # ÖVP - Türkis
+    "#e02a12",  # SPÖ - Rot
+    "#115093",  # FPÖ - Blau
+    "#74a201",  # GRÜNE - Grün
+    "#c21d62",  # NEOS - Pink
+    "#ffea00",  # BIER - Gelb
+    "#ffea00",  # MFG - Türkis
+    "#ffffed",  # BGE - Hellblau
+    "#4d194a",  # LMP - Orange
+    "#a5dcb4",  # GAZA - Grau
+    "#e70037",  # KPÖ - Dunkelrot
+    "#ff9273"   # KEINE - Dunkelgrau
 ]
 
 # Punktevergabe mit Eingabefeldern in Reihen mit 3 Spalten
