@@ -9,6 +9,9 @@ st.write("Verteilen Sie genau 10 Punkte auf die Parteien nach Ihrem Ermessen. Di
 parteien = ["ÖVP", "SPÖ", "FPÖ", "GRÜNE", "NEOS", "BIER", "MFG", "BGE", "LMP", "GAZA", "KPÖ", "KEINE"]
 punkte_verteilung = []
 
+# Farbenliste für die Parteien
+farben = ["#FFD700", "#FF0000", "#0000FF", "#008000", "#FF1493", "#8B4513", "#FFA500", "#00CED1", "#FF6347", "#2E8B57", "#8A2BE2", "#696969"]
+
 # Punktevergabe mit Dropdowns
 for partei in parteien:
     punkte = st.number_input(f"Punkte für {partei}:", min_value=0, max_value=10, step=1, key=partei)
@@ -25,15 +28,17 @@ else:
 
 # Tortengrafik der Punkteverteilung
 if vergebene_punkte == 10:
-    # Filtere Parteien und Punkte, um nur die mit mehr als 0 Punkten anzuzeigen
+    # Filtere Parteien, Punkte und Farben, um nur die mit mehr als 0 Punkten anzuzeigen
     parteien_filtered = [partei for i, partei in enumerate(parteien) if punkte_verteilung[i] > 0]
     punkte_filtered = [punkte for punkte in punkte_verteilung if punkte > 0]
+    farben_filtered = [farben[i] for i in range(len(punkte_verteilung)) if punkte_verteilung[i] > 0]
 
     # Erstellen der Tortengrafik
     fig, ax = plt.subplots()
     ax.pie(
         punkte_filtered, 
         labels=parteien_filtered, 
+        colors=farben_filtered,  # Farben für die Parteien
         autopct=lambda p: f'{int(p * sum(punkte_filtered) / 100)}' if p > 0 else '', 
         startangle=90
     )
