@@ -23,11 +23,6 @@ if vergebene_punkte != 10:
 else:
     st.success(f"Sie haben genau 10 Punkte korrekt vergeben!")
 
-# Ausgabe der Punkteverteilung
-st.write("Ihre Punkteverteilung:")
-for i, partei in enumerate(parteien):
-    st.write(f"{partei}: {punkte_verteilung[i]} Punkte")
-
 # Tortengrafik der Punkteverteilung
 if vergebene_punkte == 10:
     # Filtere Parteien und Punkte, um nur die mit mehr als 0 Punkten anzuzeigen
@@ -39,7 +34,7 @@ if vergebene_punkte == 10:
     ax.pie(
         punkte_filtered, 
         labels=parteien_filtered, 
-        autopct=lambda p: f'{int(p * sum(punkte_filtered) / 100)} Punkte' if p > 0 else '', 
+        autopct=lambda p: f'{int(p * sum(punkte_filtered) / 100)}' if p > 0 else '', 
         startangle=90
     )
     ax.axis('equal')  # Gleichmäßige Darstellung der Torte
