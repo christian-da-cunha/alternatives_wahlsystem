@@ -1,10 +1,11 @@
 import streamlit as st
+import matplotlib.pyplot as plt
 
 # Titel und Beschreibung der App
 st.title("Alternatives Wahlsystem - Punktevergabe")
 st.write("Verteilen Sie genau 10 Punkte auf die Parteien nach Ihrem Ermessen. Die Gesamtpunktzahl muss 10 betragen.")
 
-# Korrigierte Parteienliste
+# Parteienliste
 parteien = ["ÖVP", "SPÖ", "FPÖ", "GRÜNE", "NEOS", "BIER", "MFG", "BGE", "LMP", "GAZA", "KPÖ", "KEINE"]
 punkte_verteilung = []
 
@@ -13,10 +14,23 @@ for partei in parteien:
     punkte = st.number_input(f"Punkte für {partei}:", min_value=0, max_value=10, step=1, key=partei)
     punkte_verteilung.append(punkte)
 
-# Prüfung der Gesamtpunkte
-if sum(punkte_verteilung) != 10:
-    st.error("Die Gesamtpunktzahl muss genau 10 betragen. Bitte passen Sie die Punkteverteilung an.")
+# Summe der vergebenen Punkte berechnen
+vergebene_punkte = sum(punkte_verteilung)
+
+# Prüfung der Gesamtpunkte und entsprechende Meldung
+if vergebene_punkte != 10:
+    st.error(f"Die Gesamtpunktzahl muss genau 10 betragen. Aktuell vergeben: {vergebene_punkte} Punkte.")
 else:
-    st.success("Sie haben genau 10 Punkte korrekt vergeben!")
-    
-# Hier können Sie weitere Analysen oder Visualisierungen hinzufügen
+    st.success(f"Sie haben genau 10 Punkte korrekt vergeben!")
+
+# Ausgabe der Punkteverteilung
+st.write("Ihre Punkteverteilung:")
+for i, partei in enumerate(parteien):
+    st.write(f"{partei}: {punkte_verteilung[i]} Punkte")
+
+# Tortengrafik der Punkteverteilung
+if vergebene_punkte == 10:
+    fig, ax = plt.subplots()
+    ax.pie(punkte_verteilung, labels=parteien, autopct='%1.1f%%', startangle=90)
+    ax.axis('equal')  # Gleichmäßige Darstellung der Torte
+    st.pyplot(fig)
