@@ -30,7 +30,17 @@ for i, partei in enumerate(parteien):
 
 # Tortengrafik der Punkteverteilung
 if vergebene_punkte == 10:
+    # Filtere Parteien und Punkte, um nur die mit mehr als 0 Punkten anzuzeigen
+    parteien_filtered = [partei for i, partei in enumerate(parteien) if punkte_verteilung[i] > 0]
+    punkte_filtered = [punkte for punkte in punkte_verteilung if punkte > 0]
+
+    # Erstellen der Tortengrafik
     fig, ax = plt.subplots()
-    ax.pie(punkte_verteilung, labels=parteien, autopct='%1.1f%%', startangle=90)
+    ax.pie(
+        punkte_filtered, 
+        labels=parteien_filtered, 
+        autopct=lambda p: f'{int(p * sum(punkte_filtered) / 100)} Punkte' if p > 0 else '', 
+        startangle=90
+    )
     ax.axis('equal')  # Gleichmäßige Darstellung der Torte
     st.pyplot(fig)
