@@ -28,12 +28,6 @@ st.write("Ihre Punkteverteilung:")
 for i, partei in enumerate(parteien):
     st.write(f"{partei}: {punkte_verteilung[i]} Punkte")
 
-# Prüfung der Gesamtpunkte und entsprechende Meldung (unterhalb der Eingabefelder)
-if vergebene_punkte != 10:
-    st.error(f"Die Gesamtpunktzahl muss genau 10 betragen. Aktuell vergeben: {vergebene_punkte} Punkte.")
-else:
-    st.success(f"Sie haben genau 10 Punkte korrekt vergeben!")
-
 # Tortengrafik der Punkteverteilung
 if vergebene_punkte == 10:
     # Filtere Parteien und Punkte, um nur die mit mehr als 0 Punkten anzuzeigen
