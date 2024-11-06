@@ -25,10 +25,12 @@ farben = [
     "#696969"   # KEINE - Dunkelgrau
 ]
 
-# Punktevergabe mit Dropdowns
-for partei in parteien:
-    punkte = st.number_input(f"Punkte für {partei}:", min_value=0, max_value=10, step=1, key=partei)
-    punkte_verteilung.append(punkte)
+# Punktevergabe mit Eingabefeldern in Reihen mit 3 Spalten
+columns = st.columns(3)
+for i, partei in enumerate(parteien):
+    with columns[i % 3]:  # Wechselt zwischen den 3 Spalten
+        punkte = st.number_input(f"Punkte für {partei}:", min_value=0, max_value=10, step=1, key=partei)
+        punkte_verteilung.append(punkte)
 
 # Summe der vergebenen Punkte berechnen
 vergebene_punkte = sum(punkte_verteilung)
@@ -57,13 +59,3 @@ if vergebene_punkte == 10:
     )
     ax.axis('equal')  # Gleichmäßige Darstellung der Torte
     st.pyplot(fig)
-
-# Button zum Senden der Daten
-if vergebene_punkte == 10:
-    if st.button("Daten senden"):
-        # Eingabefenster zum Auswählen der Partei bei der letzten Wahl
-        letzte_wahl = st.selectbox("Welche Partei haben Sie bei der letzten Wahl gewählt?", parteien)
-        st.write(f"Sie haben bei der letzten Wahl die Partei '{letzte_wahl}' gewählt.")
-else:
-    # Button deaktiviert, wenn die Punktesumme nicht 10 ist
-    st.button("Daten senden", disabled=True)
