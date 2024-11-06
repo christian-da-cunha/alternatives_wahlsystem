@@ -2,34 +2,26 @@ import streamlit as st
 
 # Titel und Beschreibung der App
 st.title("Alternatives Wahlsystem - Punktevergabe")
-st.write("Verteilen Sie genau 10 Punkte auf die Parteien, indem Sie die Kästchen ankreuzen.")
+st.write("Verteilen Sie genau 10 Punkte auf die Parteien nach Ihrem Ermessen. Die Gesamtpunktzahl muss 10 betragen.")
 
 # Parteienliste
 parteien = ["Partei A", "Partei B", "Partei C", "Partei D"]
-punkte_verteilung = {partei: 0 for partei in parteien}
+punkte_verteilung = []
 
-# Anzahl der verfügbaren Punkte
-total_punkte = 10
-punkte_vergeben = 0
-
-# Punktevergabe mit Checkboxen
+# Punktevergabe mit Dropdowns
 for partei in parteien:
-    st.write(f"{partei}:")
-    # Erstellen Sie 5 Checkboxen für jede Partei
-    for i in range(5):
-        if st.checkbox(f"Punkt {i + 1} für {partei}", key=f"{partei}_{i}"):
-            punkte_verteilung[partei] += 1
-            punkte_vergeben += 1
+    punkte = st.number_input(f"Punkte für {partei}:", min_value=0, max_value=10, step=1, key=partei)
+    punkte_verteilung.append(punkte)
 
 # Prüfung der Gesamtpunkte
-if punkte_vergeben != total_punkte:
-    st.error(f"Sie müssen genau {total_punkte} Punkte vergeben. Aktuell vergeben: {punkte_vergeben}.")
+if sum(punkte_verteilung) != 10:
+    st.error("Die Gesamtpunktzahl muss genau 10 betragen. Bitte passen Sie die Punkteverteilung an.")
 else:
-    st.success(f"Sie haben genau {total_punkte} Punkte vergeben!")
+    st.success("Sie haben genau 10 Punkte korrekt vergeben!")
 
 # Ausgabe der Punkteverteilung
 st.write("Ihre Punkteverteilung:")
-for partei, punkte in punkte_verteilung.items():
-    st.write(f"{partei}: {punkte} Punkte")
+for i, partei in enumerate(parteien):
+    st.write(f"{partei}: {punkte_verteilung[i]} Punkte")
 
 # Hier können Sie weitere Analysen oder Visualisierungen hinzufügen
