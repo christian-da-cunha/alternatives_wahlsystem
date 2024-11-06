@@ -5,7 +5,7 @@ st.title("Alternatives Wahlsystem - Punktevergabe")
 st.write("Verteilen Sie genau 10 Punkte auf die Parteien nach Ihrem Ermessen. Die Gesamtpunktzahl muss 10 betragen.")
 
 # Parteienliste
-parteien = ["Partei A", "Partei B", "Partei C", "Partei D"]
+parteien = ["ÖVP", "SPÖ", "FPÖ", "GRÜNE", "NEOS", "BIER", "MFG", "BGE", "LMP", "GAZA", "KPÖ";"KEINE"]
 punkte_verteilung = []
 
 # Punktevergabe mit Dropdowns
