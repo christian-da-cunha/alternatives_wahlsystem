@@ -17,7 +17,7 @@ farben = [
     "#74a201",  # GRÜNE - Grün
     "#c21d62",  # NEOS - Pink
     "#ffea00",  # BIER - Gelb
-    "#ffea00",  # MFG - Türkis
+    "#fe5826",  # MFG - Türkis
     "#fcfbe6",  # BGE - Hellblau
     "#4d194a",  # LMP - Orange
     "#a5dcb4",  # GAZA - Grau
