@@ -9,6 +9,7 @@ st.write("Verteilen Sie genau 10 Punkte auf die Parteien nach Ihrem Ermessen. Di
 parteien = ["ÖVP", "SPÖ", "FPÖ", "GRÜNE", "NEOS", "BIER", "MFG", "BGE", "LMP", "GAZA", "KPÖ", "KEINE"]
 punkte_verteilung = []
 
+# Farbenliste für die Parteien
 farben = [
     "#87CEEB",  # ÖVP - Türkis
     "#CC0000",  # SPÖ - Rot
@@ -19,7 +20,7 @@ farben = [
     "#00B7EB",  # MFG - Türkis
     "#87CEEB",  # BGE - Hellblau
     "#FF6600",  # LMP - Orange
-    "#808080",  # GAZA - Grau (oder eine passende neutrale Farbe)
+    "#808080",  # GAZA - Grau
     "#B22222",  # KPÖ - Dunkelrot
     "#696969"   # KEINE - Dunkelgrau
 ]
@@ -56,3 +57,13 @@ if vergebene_punkte == 10:
     )
     ax.axis('equal')  # Gleichmäßige Darstellung der Torte
     st.pyplot(fig)
+
+# Button zum Senden der Daten
+if vergebene_punkte == 10:
+    if st.button("Daten senden"):
+        # Eingabefenster zum Auswählen der Partei bei der letzten Wahl
+        letzte_wahl = st.selectbox("Welche Partei haben Sie bei der letzten Wahl gewählt?", parteien)
+        st.write(f"Sie haben bei der letzten Wahl die Partei '{letzte_wahl}' gewählt.")
+else:
+    # Button deaktiviert, wenn die Punktesumme nicht 10 ist
+    st.button("Daten senden", disabled=True)
