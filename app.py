@@ -5,13 +5,37 @@ import matplotlib.pyplot as plt
 st.title("Alternatives Wahlsystem - Punktevergabe")
 st.write("Verteilen Sie genau 10 Punkte auf die Parteien nach Ihrem Ermessen. Die Gesamtpunktzahl muss 10 betragen.")
 
+# CSS für Styling
+st.markdown(
+    """
+    <style>
+    .number-input {
+        width: 100px !important; /* Schmale Breite */
+        height: 60px !important; /* Größere Höhe */
+        font-size: 24px !important; /* Größere Schriftgröße */
+        text-align: center; /* Zentrierte Zahl */
+    }
+    </style>
+    """, 
+    unsafe_allow_html=True
+)
+
 # Parteienliste
 parteien = ["ÖVP", "SPÖ", "FPÖ", "GRÜNE", "NEOS", "BIER", "MFG", "BGE", "LMP", "GAZA", "KPÖ", "KEINE"]
 punkte_verteilung = []
 
-# Punktevergabe mit Dropdowns
+# Punktevergabe mit gestylten Eingabefeldern
 for partei in parteien:
-    punkte = st.number_input(f"Punkte für {partei}:", min_value=0, max_value=10, step=1, key=partei)
+    punkte = st.number_input(
+        f"Punkte für {partei}:",
+        min_value=0,
+        max_value=10,
+        step=1,
+        key=partei,
+        format="%d"
+    )
+    # Hinzufügen von CSS-Klassen für die Eingabefelder
+    st.markdown(f'<div class="number-input"></div>', unsafe_allow_html=True)
     punkte_verteilung.append(punkte)
 
 # Summe der vergebenen Punkte berechnen
@@ -39,7 +63,7 @@ if vergebene_punkte == 10:
     ax.pie(
         punkte_filtered, 
         labels=parteien_filtered, 
-        autopct=lambda p: f'{int(p * sum(punkte_filtered) / 100)}' if p > 0 else '', 
+        autopct=lambda p: f'{int(p * sum(punkte_filtered) / 100)} Punkte' if p > 0 else '', 
         startangle=90
     )
     ax.axis('equal')  # Gleichmäßige Darstellung der Torte
