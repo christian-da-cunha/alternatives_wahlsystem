@@ -4,8 +4,8 @@ import streamlit as st
 st.title("Alternatives Wahlsystem - Punktevergabe")
 st.write("Verteilen Sie genau 10 Punkte auf die Parteien nach Ihrem Ermessen. Die Gesamtpunktzahl muss 10 betragen.")
 
-# Parteienliste
-parteien = ["VP", "SP", "FP", "GRNE", "NEOS", "BIER", "MFG", "BGE", "LMP", "GAZA", "KP";"KEINE"]
+# Korrigierte Parteienliste
+parteien = ["VP", "SP", "FP", "GRNE", "NEOS", "BIER", "MFG", "BGE", "LMP", "GAZA", "KP", "KEINE"]
 punkte_verteilung = []
 
 # Punktevergabe mit Dropdowns
