@@ -5,37 +5,13 @@ import matplotlib.pyplot as plt
 st.title("Alternatives Wahlsystem - Punktevergabe")
 st.write("Verteilen Sie genau 10 Punkte auf die Parteien nach Ihrem Ermessen. Die Gesamtpunktzahl muss 10 betragen.")
 
-# CSS für Styling
-st.markdown(
-    """
-    <style>
-    .number-input {
-        width: 100px !important; /* Schmale Breite */
-        height: 60px !important; /* Größere Höhe */
-        font-size: 24px !important; /* Größere Schriftgröße */
-        text-align: center; /* Zentrierte Zahl */
-    }
-    </style>
-    """, 
-    unsafe_allow_html=True
-)
-
 # Parteienliste
 parteien = ["ÖVP", "SPÖ", "FPÖ", "GRÜNE", "NEOS", "BIER", "MFG", "BGE", "LMP", "GAZA", "KPÖ", "KEINE"]
 punkte_verteilung = []
 
-# Punktevergabe mit gestylten Eingabefeldern
+# Punktevergabe mit Dropdowns
 for partei in parteien:
-    punkte = st.number_input(
-        f"Punkte für {partei}:",
-        min_value=0,
-        max_value=10,
-        step=1,
-        key=partei,
-        format="%d"
-    )
-    # Hinzufügen von CSS-Klassen für die Eingabefelder
-    st.markdown(f'<div class="number-input"></div>', unsafe_allow_html=True)
+    punkte = st.number_input(f"Punkte für {partei}:", min_value=0, max_value=10, step=1, key=partei)
     punkte_verteilung.append(punkte)
 
 # Summe der vergebenen Punkte berechnen
