@@ -9,8 +9,20 @@ st.write("Verteilen Sie genau 10 Punkte auf die Parteien nach Ihrem Ermessen. Di
 parteien = ["ÖVP", "SPÖ", "FPÖ", "GRÜNE", "NEOS", "BIER", "MFG", "BGE", "LMP", "GAZA", "KPÖ", "KEINE"]
 punkte_verteilung = []
 
-# Farbenliste für die Parteien
-farben = ["#FFD700", "#FF0000", "#0000FF", "#008000", "#FF1493", "#8B4513", "#FFA500", "#00CED1", "#FF6347", "#2E8B57", "#8A2BE2", "#696969"]
+farben = [
+    "#000000",  # ÖVP - Schwarz
+    "#CC0000",  # SPÖ - Rot
+    "#0E49B5",  # FPÖ - Blau
+    "#6AB023",  # GRÜNE - Grün
+    "#E91E63",  # NEOS - Pink
+    "#8B4513",  # BIER - Braun
+    "#00B7EB",  # MFG - Türkis
+    "#87CEEB",  # BGE - Hellblau
+    "#FF6600",  # LMP - Orange
+    "#808080",  # GAZA - Grau (oder eine passende neutrale Farbe)
+    "#B22222",  # KPÖ - Dunkelrot
+    "#696969"   # KEINE - Dunkelgrau
+]
 
 # Punktevergabe mit Dropdowns
 for partei in parteien:
