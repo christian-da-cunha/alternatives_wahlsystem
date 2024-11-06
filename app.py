@@ -10,12 +10,12 @@ parteien = ["ÖVP", "SPÖ", "FPÖ", "GRÜNE", "NEOS", "BIER", "MFG", "BGE", "LMP
 punkte_verteilung = []
 
 farben = [
-    "#000000",  # ÖVP - Schwarz
+    "#87CEEB",  # ÖVP - Türkis
     "#CC0000",  # SPÖ - Rot
     "#0E49B5",  # FPÖ - Blau
     "#6AB023",  # GRÜNE - Grün
     "#E91E63",  # NEOS - Pink
-    "#8B4513",  # BIER - Braun
+    "#000000",  # BIER - Gelb
     "#00B7EB",  # MFG - Türkis
     "#87CEEB",  # BGE - Hellblau
     "#FF6600",  # LMP - Orange
