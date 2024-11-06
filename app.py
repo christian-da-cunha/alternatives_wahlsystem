@@ -39,7 +39,7 @@ if vergebene_punkte == 10:
     ax.pie(
         punkte_filtered, 
         labels=parteien_filtered, 
-        autopct=lambda p: f'{int(p * sum(punkte_filtered) / 100)} P' if p > 0 else '', 
+        autopct=lambda p: f'{int(p * sum(punkte_filtered) / 100)}' if p > 0 else '', 
         startangle=90
     )
     ax.axis('equal')  # Gleichmäßige Darstellung der Torte
