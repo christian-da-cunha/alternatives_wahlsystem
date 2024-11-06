@@ -18,10 +18,5 @@ if sum(punkte_verteilung) != 10:
     st.error("Die Gesamtpunktzahl muss genau 10 betragen. Bitte passen Sie die Punkteverteilung an.")
 else:
     st.success("Sie haben genau 10 Punkte korrekt vergeben!")
-
-# Ausgabe der Punkteverteilung
-st.write("Ihre Punkteverteilung:")
-for i, partei in enumerate(parteien):
-    st.write(f"{partei}: {punkte_verteilung[i]} Punkte")
-
+    
 # Hier können Sie weitere Analysen oder Visualisierungen hinzufügen
