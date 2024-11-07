@@ -4,12 +4,9 @@ import matplotlib.pyplot as plt
 # Titel und Beschreibung der App
 
 st.title("Aternativer Stimmzettel")
-st.subheader("Entwicklung und Analyse eines alternativen Wahlsystems unter Nutzung von Business Analytics")
-st.write("Datenerhebung im Rahmen der Masterarbeit im Studiengang Business Analytics an der Technikum Wien Academy")
+st.subheader("Datenerhebung im Rahmen der Masterarbeit im Studiengang Business Analytics an der Technikum Wien Academy")
 st.write("---")
-st.write("Titel der Arbeit: Entwicklung und Analyse eines alternativen Wahlsystems unter Nutzung von Business Analytics")
-st.write("Author: Christian Kaufmann, BA")
-st.write("Kontakt: bl23l005@technikum-wien.at")
+st.write("DANKE für die Mitwirkung!")
 st.write("---")
 
 # Eingabe des Alters mit Optionsfeldern für Altersgruppen
