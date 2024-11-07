@@ -2,9 +2,8 @@ import streamlit as st
 import matplotlib.pyplot as plt
 
 # Titel und Beschreibung der App
-st.title("Alternatives Wahlsystem - Stimmzettel")
-st.write("---")
-st.write("Masterarbeit im Lehrgang Business Analytics")
+st.title("Anders wählen")
+st.write("Aternativer Stimmzettel")
 st.write("Entwicklung und Analyse eines alternativen Wahlsystems unter Nutzung von Business Analytics")
 st.write("---")
 st.write("Erstellt von Christian Kaufmann")
