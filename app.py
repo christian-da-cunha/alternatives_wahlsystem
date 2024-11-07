@@ -2,7 +2,11 @@ import streamlit as st
 import matplotlib.pyplot as plt
 
 # Titel und Beschreibung der App
-st.write("Webanwendung zur Datenerhebung im Rahmen der Masterarbeit mit dem Titel 'Entwicklung und Analyse eines alternativen Wahlsystems unter Nutzung von Business Analytics'")
+st.write("Datenerhebung im Rahmen der Masterarbeit im Studiengang Business Analytics an der Technikum Wien Academy")
+st.write("Thema: Entwicklung und Analyse eines alternativen Wahlsystems unter Nutzung von Business Analytics")
+st.write("Author: Christian Kaufmann, BA")
+st.write("Kontakt: bl23l005@technikum-wien.at")
+st.write("---")
 st.title("Aternativer Stimmzettel")
 st.write("Entwicklung und Analyse eines alternativen Wahlsystems unter Nutzung von Business Analytics")
 st.write("---")
