@@ -6,20 +6,29 @@ st.title("Alternatives Wahlsystem - Punktevergabe")
 st.write("Verteilen Sie genau 10 Punkte auf die Parteien nach Ihrem Ermessen. Die Gesamtpunktzahl muss 10 betragen.")
 
 # Eingabe des Alters
-alter = st.number_input("Bitte geben Sie Ihr Alter ein:", min_value=16, max_value=115, step=1)
+alter = st.number_input("1. Bitte geben Sie Ihr Alter ein:", min_value=16, max_value=115, step=1)
+if alter:
+    st.success("Alter erfolgreich eingegeben.")
+else:
+    st.warning("Bitte geben Sie Ihr Alter ein.")
 
 # Frage zur bevorzugten Partei
 parteien = ["ÖVP", "SPÖ", "FPÖ", "GRÜNE", "NEOS", "BIER", "MFG", "BGE", "LMP", "GAZA", "KPÖ", "KEINE"]
-bevorzugte_partei = st.selectbox(
-    "Welche Partei würden Sie wählen, wenn heute Wahlen wären?",
-    parteien
-)
+bevorzugte_partei = st.selectbox("2. Welche Partei würden Sie wählen, wenn heute Wahlen wären?", parteien)
+if bevorzugte_partei:
+    st.success("Bevorzugte Partei erfolgreich ausgewählt.")
+else:
+    st.warning("Bitte wählen Sie eine Partei.")
 
 # Frage zur Negativstimme
-negativstimme = st.selectbox(
-    "Welche Partei würden Sie eine Stimme abziehen (Negativstimme)?",
-    parteien
-)
+negativstimme = st.selectbox("3. Welche Partei würden Sie eine Stimme abziehen (Negativstimme)?", parteien)
+if negativstimme:
+    st.success("Negativstimme erfolgreich ausgewählt.")
+else:
+    st.warning("Bitte wählen Sie eine Partei.")
+
+# Überschrift für die Punktevergabe
+st.subheader("4. Punktevergabe an die Parteien")
 
 # Farbenliste für die Parteien
 farben = [
