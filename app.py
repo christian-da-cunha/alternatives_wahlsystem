@@ -103,9 +103,3 @@ if not fehler:
     else:
         st.success(f"Sie haben genau 10 Punkte korrekt vergeben!")
 
-# Tortengrafik der Punkteverteilung
-if vergebene_punkte == 10 and not fehler:
-    # Filtere Parteien, Punkte und Farben, um nur die mit mehr als 0 Punkten anzuzeigen
-    parteien_filtered = [partei for partei, punkte in punkte_verteilung if punkte > 0]
-    punkte_filtered = [punkte for _, punkte in punkte_verteilung if punkte > 0]
-    farben_filtered = [farben[i] for
