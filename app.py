@@ -8,7 +8,6 @@ st.write("Entwicklung und Analyse eines alternativen Wahlsystems unter Nutzung v
 st.write("---")
 st.write("Erstellt von Christian Kaufmann")
 
-
 # Eingabe des Alters
 st.subheader("1. Persönliche Daten")
 alter = st.selectbox("Bitte geben Sie Ihr Alter an:", ["keine Angabe"] + [str(i) for i in range(16, 116)])
@@ -19,20 +18,21 @@ else:
 
 # Frage zur bevorzugten Partei
 st.subheader("2. Bevorzugte Partei")
-parteien = ["keine Angabe", "ÖVP", "SPÖ", "FPÖ", "GRÜNE", "NEOS", "BIER", "MFG", "BGE", "LMP", "GAZA", "KPÖ", "KEINE"]
-bevorzugte_partei = st.selectbox("2. Welche Partei würden Sie wählen, wenn heute Wahlen wären?", parteien)
-if bevorzugte_partei != "keine Angabe":
-    st.success("Bevorzugte Partei erfolgreich ausgewählt.")
-else:
-    st.error("Bitte wählen Sie eine Partei.")
+parteien = ["ÖVP", "SPÖ", "FPÖ", "GRÜNE", "NEOS", "BIER", "MFG", "BGE", "LMP", "GAZA", "KPÖ", "KEINE"]
+selected_partei = st.radio("Welche Partei würden Sie wählen, wenn heute Wahlen wären?", parteien)
+
+if selected_partei:
+    st.success(f"Bevorzugte Partei: {selected_partei}")
 
 # Frage zur Negativstimme
 st.subheader("3. Abgelehnte Partei")
-negativstimme = st.selectbox("3. Welche Partei würden Sie eine Stimme abziehen (Negativstimme)?", parteien)
-if negativstimme != "keine Angabe":
-    st.success("Negativstimme erfolgreich ausgewählt.")
-else:
-    st.error("Bitte wählen Sie eine Partei.")
+negativ_partei = st.radio(
+    "Welche Partei würden Sie eine Stimme abziehen (Negativstimme)?", 
+    [p for p in parteien if p != selected_partei]  # Ausschließen der bereits ausgewählten Partei
+)
+
+if negativ_partei:
+    st.success(f"Negativstimme: {negativ_partei}")
 
 # Überschrift für die Punktevergabe
 st.subheader("4. Punktevergabe an die Parteien")
@@ -55,8 +55,8 @@ farben = [
 
 # Erstellen von Spalten für die Eingabefelder
 punkte_verteilung = []
-columns = st.columns(len(parteien) - 1)  # -1, da "keine Angabe" keine Punkte bekommt
-for i, partei in enumerate(parteien[1:]):  # Beginne bei der ersten echten Partei, nicht "keine Angabe"
+columns = st.columns(len(parteien))
+for i, partei in enumerate(parteien):
     with columns[i]:
         punkte = st.number_input(f"{partei}", min_value=0, max_value=10, step=1, key=partei)
         punkte_verteilung.append(punkte)
@@ -73,7 +73,7 @@ else:
 # Tortengrafik der Punkteverteilung
 if vergebene_punkte == 10:
     # Filtere Parteien, Punkte und Farben, um nur die mit mehr als 0 Punkten anzuzeigen
-    parteien_filtered = [partei for i, partei in enumerate(parteien[1:]) if punkte_verteilung[i] > 0]
+    parteien_filtered = [partei for i, partei in enumerate(parteien) if punkte_verteilung[i] > 0]
     punkte_filtered = [punkte for punkte in punkte_verteilung if punkte > 0]
     farben_filtered = [farben[i] for i in range(len(punkte_verteilung)) if punkte_verteilung[i] > 0]
 
