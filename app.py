@@ -5,30 +5,30 @@ import matplotlib.pyplot as plt
 st.title("Alternatives Wahlsystem - Punktevergabe")
 st.write("Verteilen Sie genau 10 Punkte auf die Parteien nach Ihrem Ermessen. Die Gesamtpunktzahl muss 10 betragen.")
 
-# Eingabe des Alters# Überschrift für die Punktevergabe
+# Eingabe des Alters
 st.subheader("1. Persönliche Daten")
-alter = st.number_input("Bitte geben Sie Ihr Alter ein:", min_value=16, max_value=115, step=1)
-if alter:
+alter = st.selectbox("Bitte geben Sie Ihr Alter an oder wählen Sie 'keine Angabe':", ["keine Angabe"] + [str(i) for i in range(16, 116)])
+if alter != "keine Angabe":
     st.success("Alter erfolgreich eingegeben.")
 else:
-    st.warning("Bitte geben Sie Ihr Alter ein.")
+    st.warning("Bitte geben Sie Ihr Alter ein oder wählen Sie 'keine Angabe'.")
 
 # Frage zur bevorzugten Partei
 st.subheader("2. Bevorzugte Partei")
-parteien = ["ÖVP", "SPÖ", "FPÖ", "GRÜNE", "NEOS", "BIER", "MFG", "BGE", "LMP", "GAZA", "KPÖ", "KEINE"]
+parteien = ["keine Angabe", "ÖVP", "SPÖ", "FPÖ", "GRÜNE", "NEOS", "BIER", "MFG", "BGE", "LMP", "GAZA", "KPÖ", "KEINE"]
 bevorzugte_partei = st.selectbox("2. Welche Partei würden Sie wählen, wenn heute Wahlen wären?", parteien)
-if bevorzugte_partei:
+if bevorzugte_partei != "keine Angabe":
     st.success("Bevorzugte Partei erfolgreich ausgewählt.")
 else:
-    st.warning("Bitte wählen Sie eine Partei.")
+    st.warning("Bitte wählen Sie eine Partei oder 'keine Angabe'.")
 
 # Frage zur Negativstimme
 st.subheader("3. Abgelehnte Partei")
 negativstimme = st.selectbox("3. Welche Partei würden Sie eine Stimme abziehen (Negativstimme)?", parteien)
-if negativstimme:
+if negativstimme != "keine Angabe":
     st.success("Negativstimme erfolgreich ausgewählt.")
 else:
-    st.warning("Bitte wählen Sie eine Partei.")
+    st.warning("Bitte wählen Sie eine Partei oder 'keine Angabe'.")
 
 # Überschrift für die Punktevergabe
 st.subheader("4. Punktevergabe an die Parteien")
@@ -51,16 +51,16 @@ farben = [
 
 # Erstellen von Spalten für die Eingabefelder
 punkte_verteilung = []
-columns = st.columns(len(parteien))
-for i, partei in enumerate(parteien):
-    with columns[i]:  # Jede Partei in eine eigene Spalte setzen
+columns = st.columns(len(parteien) - 1)  # -1, da "keine Angabe" keine Punkte bekommt
+for i, partei in enumerate(parteien[1:]):  # Beginne bei der ersten echten Partei, nicht "keine Angabe"
+    with columns[i]:
         punkte = st.number_input(f"{partei}", min_value=0, max_value=10, step=1, key=partei)
         punkte_verteilung.append(punkte)
 
 # Summe der vergebenen Punkte berechnen
 vergebene_punkte = sum(punkte_verteilung)
 
-# Prüfung der Gesamtpunkte und entsprechende Meldung (oberhalb der Eingabefelder)
+# Prüfung der Gesamtpunktzahl und entsprechende Meldung
 if vergebene_punkte != 10:
     st.error(f"Die Gesamtpunktzahl muss genau 10 betragen. Aktuell vergeben: {vergebene_punkte} Punkte.")
 else:
@@ -69,7 +69,7 @@ else:
 # Tortengrafik der Punkteverteilung
 if vergebene_punkte == 10:
     # Filtere Parteien, Punkte und Farben, um nur die mit mehr als 0 Punkten anzuzeigen
-    parteien_filtered = [partei for i, partei in enumerate(parteien) if punkte_verteilung[i] > 0]
+    parteien_filtered = [partei for i, partei in enumerate(parteien[1:]) if punkte_verteilung[i] > 0]
     punkte_filtered = [punkte for punkte in punkte_verteilung if punkte > 0]
     farben_filtered = [farben[i] for i in range(len(punkte_verteilung)) if punkte_verteilung[i] > 0]
 
@@ -78,9 +78,9 @@ if vergebene_punkte == 10:
     ax.pie(
         punkte_filtered, 
         labels=parteien_filtered, 
-        colors=farben_filtered,  # Farben für die Parteien
-        autopct=lambda p: f'{int(p * sum(punkte_filtered) / 100)}' if p > 0 else '', 
+        colors=farben_filtered,
+        autopct=lambda p: f'{int(p * sum(punkte_filtered) / 100)}' if p > 0 else '',
         startangle=90
     )
-    ax.axis('equal')  # Gleichmäßige Darstellung der Torte
+    ax.axis('equal')
     st.pyplot(fig)
