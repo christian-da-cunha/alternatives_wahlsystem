@@ -11,11 +11,11 @@ st.write("Erstellt von Christian Kaufmann")
 
 # Eingabe des Alters
 st.subheader("1. Persönliche Daten")
-alter = st.selectbox("Bitte geben Sie Ihr Alter an oder wählen Sie 'keine Angabe':", ["keine Angabe"] + [str(i) for i in range(16, 116)])
+alter = st.selectbox("Bitte geben Sie Ihr Alter an:", ["keine Angabe"] + [str(i) for i in range(16, 116)])
 if alter != "keine Angabe":
     st.success("Alter erfolgreich eingegeben.")
 else:
-    st.warning("Bitte geben Sie Ihr Alter ein oder wählen Sie 'keine Angabe'.")
+    st.error("Bitte geben Sie Ihr Alter ein.")
 
 # Frage zur bevorzugten Partei
 st.subheader("2. Bevorzugte Partei")
