@@ -2,8 +2,13 @@ import streamlit as st
 import matplotlib.pyplot as plt
 
 # Titel und Beschreibung der App
-st.title("Alternatives Wahlsystem - Punktevergabe")
-st.write("Verteilen Sie genau 10 Punkte auf die Parteien nach Ihrem Ermessen. Die Gesamtpunktzahl muss 10 betragen.")
+st.title("Alternatives Wahlsystem - Stimmzettel")
+st.write("---")
+st.write("Masterarbeit im Lehrgang Business Analytics")
+st.write("Entwicklung und Analyse eines alternativen Wahlsystems unter Nutzung von Business Analytics")
+st.write("---")
+st.write("Erstellt von Christian Kaufmann")
+
 
 # Eingabe des Alters
 st.subheader("1. Persönliche Daten")
