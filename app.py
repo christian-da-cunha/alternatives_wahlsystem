@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 # Titel und Beschreibung der App
 st.title("Anders wählen")
-st.write("Aternativer Stimmzettel")
+st.title("Aternativer Stimmzettel")
 st.write("Entwicklung und Analyse eines alternativen Wahlsystems unter Nutzung von Business Analytics")
 st.write("---")
 st.write("Erstellt von Christian Kaufmann")
