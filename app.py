@@ -10,7 +10,7 @@ st.write("DANKE für die Mitwirkung!")
 st.write("---")
 
 # Eingabe des Alters mit Optionsfeldern für Altersgruppen
-st.subheader("1. Alter")
+st.subheader("1. ANgaben zu meiner Altersgruppe:")
 st.write("Bitte wählen Sie Ihre Altersgruppe:")
 
 # Altersgruppen mit Optionbox
@@ -23,7 +23,7 @@ else:
     st.success(f"Altersgruppe: {selected_age_group}")
 
 # Neues 2. Geschlecht abfragen
-st.subheader("2. Geschlecht")
+st.subheader("2. Angaben zu meinem Geschlecht")
 gender_options = ["Keine Angabe", "divers", "männlich", "weiblich"]
 selected_gender = st.radio("Geschlecht:", gender_options, index=0)
 
@@ -58,7 +58,7 @@ else:
     st.success(f"Negativstimme: {negativ_partei}")
 
 # Überschrift für die Punktevergabe (verschoben auf Punkt 5)
-st.subheader("5. Punktevergabe an die Parteien")
+st.subheader("5. So würde ich meine Punkte verteilen:")
 
 # Farbenliste für die Parteien
 farben = [
