@@ -21,8 +21,18 @@ if selected_age_group == "Keine Angabe":
 else:
     st.success(f"Altersgruppe: {selected_age_group}")
 
-# Frage zur bevorzugten Partei
-st.subheader("2. Bevorzugte Partei")
+# Neues 2. Geschlecht abfragen
+st.subheader("2. Geschlecht")
+gender_options = ["Keine Angabe", "divers", "männlich", "weiblich"]
+selected_gender = st.radio("Geschlecht:", gender_options, index=0)
+
+if selected_gender == "Keine Angabe":
+    st.error("Bitte wählen Sie Ihr Geschlecht aus.")
+else:
+    st.success(f"Geschlecht: {selected_gender}")
+
+# Frage zur bevorzugten Partei (verschoben auf Punkt 3)
+st.subheader("3. Bevorzugte Partei")
 parteien = ["Keine Angabe", "ÖVP", "SPÖ", "FPÖ", "GRÜNE", "NEOS", "BIER", "MFG", "BGE", "LMP", "GAZA", "KPÖ", "KEINE"]
 selected_partei = st.radio("Welche Partei würden Sie wählen, wenn heute Wahlen wären?", parteien, index=0)
 
@@ -31,8 +41,8 @@ if selected_partei == "Keine Angabe":
 else:
     st.success(f"Bevorzugte Partei: {selected_partei}")
 
-# Frage zur Negativstimme
-st.subheader("3. Abgelehnte Partei")
+# Frage zur Negativstimme (verschoben auf Punkt 4)
+st.subheader("4. Abgelehnte Partei")
 negativ_partei = st.radio(
     "Welche Partei würden Sie eine Stimme abziehen (Negativstimme)?",
     parteien,
@@ -46,8 +56,8 @@ elif negativ_partei == selected_partei:
 else:
     st.success(f"Negativstimme: {negativ_partei}")
 
-# Überschrift für die Punktevergabe
-st.subheader("4. Punktevergabe an die Parteien")
+# Überschrift für die Punktevergabe (verschoben auf Punkt 5)
+st.subheader("5. Punktevergabe an die Parteien")
 
 # Farbenliste für die Parteien
 farben = [
