@@ -29,7 +29,7 @@ farben = [
 columns = st.columns(3)
 for i, partei in enumerate(parteien):
     with columns[i % 3]:  # Wechselt zwischen den 3 Spalten
-        punkte = st.number_input(f"Punkte für {partei}:", min_value=0, max_value=10, step=1, key=partei)
+        punkte = st.number_input(f"{partei}", min_value=0, max_value=10, step=1, key=partei)
         punkte_verteilung.append(punkte)
 
 # Summe der vergebenen Punkte berechnen
