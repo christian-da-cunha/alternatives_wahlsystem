@@ -30,12 +30,14 @@ else:
 st.subheader("3. Abgelehnte Partei")
 negativ_partei = st.radio(
     "Welche Partei würden Sie eine Stimme abziehen (Negativstimme)?",
-    ["Keine Angabe"] + [p for p in parteien if p != selected_partei],
+    parteien,
     index=0
 )
 
 if negativ_partei == "Keine Angabe":
     st.error("Bitte wählen Sie eine Partei.")
+elif negativ_partei == selected_partei:
+    st.error("Die abgelehnte Partei darf nicht mit der bevorzugten Partei übereinstimmen.")
 else:
     st.success(f"Negativstimme: {negativ_partei}")
 
