@@ -24,7 +24,7 @@ bevorzugte_partei = st.selectbox("2. Welche Partei würden Sie wählen, wenn heu
 if bevorzugte_partei != "keine Angabe":
     st.success("Bevorzugte Partei erfolgreich ausgewählt.")
 else:
-    st.warning("Bitte wählen Sie eine Partei oder 'keine Angabe'.")
+    st.error("Bitte wählen Sie eine Partei.")
 
 # Frage zur Negativstimme
 st.subheader("3. Abgelehnte Partei")
@@ -32,7 +32,7 @@ negativstimme = st.selectbox("3. Welche Partei würden Sie eine Stimme abziehen 
 if negativstimme != "keine Angabe":
     st.success("Negativstimme erfolgreich ausgewählt.")
 else:
-    st.warning("Bitte wählen Sie eine Partei oder 'keine Angabe'.")
+    st.error("Bitte wählen Sie eine Partei.")
 
 # Überschrift für die Punktevergabe
 st.subheader("4. Punktevergabe an die Parteien")
