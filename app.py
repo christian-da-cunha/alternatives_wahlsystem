@@ -63,7 +63,47 @@ farben = [
 # Erstellen von Spalten für die Eingabefelder
 punkte_verteilung = []
 columns = st.columns(len(parteien) - 1)  # -1, da "Keine Angabe" keine Punkte bekommt
-max_punkte = 10 if selected_partei == "Keine Angabe" else 10  # Maximal mögliche Punkte
+
+# Maximal erlaubte Punkte für die bevorzugte Partei
+max_punkte_fuer_partei = 10
+if selected_partei != "Keine Angabe":
+    max_punkte_fuer_partei = 10
 
 # Schleife durch Parteien (ohne "Keine Angabe")
-for i, partei in enumerate(pars
+for i, partei in enumerate(parteien[1:]):  # Beginne bei der ersten echten Partei
+    with columns[i]:
+        if partei == negativ_partei:
+            punkte = st.number_input(f"{partei}", min_value=0, max_value=0, step=1, key=partei)
+        elif partei == selected_partei:
+            punkte = st.number_input(f"{partei}", min_value=0, max_value=max_punkte_fuer_partei, step=1, key=partei)
+        else:
+            punkte = st.number_input(f"{partei}", min_value=0, max_value=10, step=1, key=partei)
+        punkte_verteilung.append(punkte)
+
+# Summe der vergebenen Punkte berechnen
+vergebene_punkte = sum(punkte_verteilung)
+
+# Prüfung der Gesamtpunktzahl und entsprechende Meldung
+if vergebene_punkte != 10:
+    st.error(f"Die Gesamtpunktzahl muss genau 10 betragen. Aktuell vergeben: {vergebene_punkte} Punkte.")
+else:
+    st.success(f"Sie haben genau 10 Punkte korrekt vergeben!")
+
+# Tortengrafik der Punkteverteilung
+if vergebene_punkte == 10:
+    # Filtere Parteien, Punkte und Farben, um nur die mit mehr als 0 Punkten anzuzeigen
+    parteien_filtered = [partei for i, partei in enumerate(parteien[1:]) if punkte_verteilung[i] > 0]
+    punkte_filtered = [punkte for punkte in punkte_verteilung if punkte > 0]
+    farben_filtered = [farben[i] for i in range(len(punkte_verteilung)) if punkte_verteilung[i] > 0]
+
+    # Erstellen der Tortengrafik
+    fig, ax = plt.subplots()
+    ax.pie(
+        punkte_filtered,
+        labels=parteien_filtered,
+        colors=farben_filtered,
+        autopct=lambda p: f'{int(p * sum(punkte_filtered) / 100)}' if p > 0 else '',
+        startangle=90
+    )
+    ax.axis('equal')
+    st.pyplot(fig)
