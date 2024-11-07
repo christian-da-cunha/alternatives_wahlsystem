@@ -10,7 +10,7 @@ st.write("DANKE für die Mitwirkung!")
 st.write("---")
 
 # Eingabe des Alters mit Optionsfeldern für Altersgruppen
-st.subheader("1. ANgaben zu meiner Altersgruppe:")
+st.subheader("1. Angaben zu meiner Altersgruppe:")
 st.write("Bitte wählen Sie Ihre Altersgruppe:")
 
 # Altersgruppen mit Optionbox
