@@ -8,10 +8,32 @@ st.write("Entwicklung und Analyse eines alternativen Wahlsystems unter Nutzung v
 st.write("---")
 st.write("Erstellt von Christian Kaufmann")
 
-# Eingabe des Alters mit einem Schieberegler
+# Eingabe des Alters mit Checkboxen für Altersgruppen
 st.subheader("1. Persönliche Daten")
-alter = st.slider("Bitte geben Sie Ihr Alter an:", 16, 115, value=16)  # Schieberegler von 16 bis 115 mit Standardwert 16
-st.success(f"Alter: {alter} Jahre")
+st.write("Bitte wählen Sie Ihre Altersgruppe:")
+
+# Checkboxen für die Altersgruppen
+age_group_16_30 = st.checkbox("16-30")
+age_group_31_50 = st.checkbox("31-50")
+age_group_51_70 = st.checkbox("51-70")
+age_group_71_90 = st.checkbox("71-90")
+age_group_over_90 = st.checkbox(">90")
+
+# Logik, um sicherzustellen, dass nur eine Checkbox ausgewählt ist
+selected_age_groups = [
+    age_group_16_30,
+    age_group_31_50,
+    age_group_51_70,
+    age_group_71_90,
+    age_group_over_90
+]
+
+if sum(selected_age_groups) > 1:
+    st.error("Bitte wählen Sie nur eine Altersgruppe aus.")
+elif sum(selected_age_groups) == 0:
+    st.error("Bitte wählen Sie eine Altersgruppe aus.")
+else:
+    st.success("Altersgruppe erfolgreich ausgewählt.")
 
 # Frage zur bevorzugten Partei
 st.subheader("2. Bevorzugte Partei")
@@ -95,21 +117,3 @@ if not fehler:
     else:
         st.success(f"Sie haben genau 10 Punkte korrekt vergeben!")
 
-# Tortengrafik der Punkteverteilung
-if vergebene_punkte == 10 and not fehler:
-    # Filtere Parteien, Punkte und Farben, um nur die mit mehr als 0 Punkten anzuzeigen
-    parteien_filtered = [partei for partei, punkte in punkte_verteilung if punkte > 0]
-    punkte_filtered = [punkte for _, punkte in punkte_verteilung if punkte > 0]
-    farben_filtered = [farben[i] for i in range(len(punkte_verteilung)) if punkte_verteilung[i][1] > 0]
-
-    # Erstellen der Tortengrafik
-    fig, ax = plt.subplots()
-    ax.pie(
-        punkte_filtered,
-        labels=parteien_filtered,
-        colors=farben_filtered,
-        autopct=lambda p: f'{int(p * sum(punkte_filtered) / 100)}' if p > 0 else '',
-        startangle=90
-    )
-    ax.axis('equal')
-    st.pyplot(fig)
