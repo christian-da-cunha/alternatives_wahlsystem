@@ -25,10 +25,10 @@ farben = [
     "#ff9273"   # KEINE - Dunkelgrau
 ]
 
-# Punktevergabe mit Eingabefeldern in Reihen mit 3 Spalten
-columns = st.columns(3)
+# Erstellen von Spalten für die Eingabefelder
+columns = st.columns(len(parteien))
 for i, partei in enumerate(parteien):
-    with columns[i % 3]:  # Wechselt zwischen den 3 Spalten
+    with columns[i]:  # Jede Partei in eine eigene Spalte setzen
         punkte = st.number_input(f"{partei}", min_value=0, max_value=10, step=1, key=partei)
         punkte_verteilung.append(punkte)
 
