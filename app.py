@@ -10,7 +10,7 @@ st.write("DANKE für die Mitwirkung!")
 st.write("---")
 
 # Eingabe des Alters mit Optionsfeldern für Altersgruppen
-st.subheader("1. Persönliche Daten")
+st.subheader("1. Alter")
 st.write("Bitte wählen Sie Ihre Altersgruppe:")
 
 # Altersgruppen mit Optionbox
@@ -33,9 +33,9 @@ else:
     st.success(f"Geschlecht: {selected_gender}")
 
 # Frage zur bevorzugten Partei (verschoben auf Punkt 3)
-st.subheader("3. Bevorzugte Partei")
+st.subheader("3. Ich würde meine Stimme folgender Partei geben:")
 parteien = ["Keine Angabe", "ÖVP", "SPÖ", "FPÖ", "GRÜNE", "NEOS", "BIER", "MFG", "BGE", "LMP", "GAZA", "KPÖ", "KEINE"]
-selected_partei = st.radio("Welche Partei würden Sie wählen, wenn heute Wahlen wären?", parteien, index=0)
+selected_partei = st.radio("Welcher Partei würden Sie Ihre Stimme geben?", parteien, index=0)
 
 if selected_partei == "Keine Angabe":
     st.error("Bitte wählen Sie eine Partei.")
@@ -43,7 +43,7 @@ else:
     st.success(f"Bevorzugte Partei: {selected_partei}")
 
 # Frage zur Negativstimme (verschoben auf Punkt 4)
-st.subheader("4. Abgelehnte Partei")
+st.subheader("4. Niemals würde ich meine Stimme folgender Partei geben:")
 negativ_partei = st.radio(
     "Welche Partei würden Sie eine Stimme abziehen (Negativstimme)?",
     parteien,
