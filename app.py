@@ -1,9 +1,9 @@
 import streamlit as st
-import matplotlib.pyplot as plt
+import pandas as pd
+import os
 
 # Titel und Beschreibung der App
-
-st.title("Aternativer Stimmzettel")
+st.title("Alternativer Stimmzettel")
 st.subheader("Datenerhebung im Rahmen der Masterarbeit im Studiengang Business Analytics an der Technikum Wien Academy")
 st.write("---")
 st.write("DANKE für die Mitwirkung!")
@@ -107,10 +107,42 @@ if selected_partei != "Keine Angabe":
             st.error(f"Die Partei '{partei}' darf nicht mehr Punkte bekommen als die bevorzugte Partei '{selected_partei}'.")
             fehler = True
 
+# Funktion zum Speichern der Daten in einer CSV-Datei
+def save_data(age_group, gender, selected_partei, negativ_partei, punkte_verteilung):
+    # Daten als Dictionary vorbereiten
+    data = {
+        "Altersgruppe": age_group,
+        "Geschlecht": gender,
+        "Bevorzugte Partei": selected_partei,
+        "Negativstimme": negativ_partei,
+        **{partei: punkte for partei, punkte in punkte_verteilung}  # Punkteverteilung als Schlüssel-Wert-Paare
+    }
+    
+    # DataFrame erstellen
+    df = pd.DataFrame([data])
+    
+    # Überprüfen, ob die Datei existiert
+    if not os.path.isfile("umfrage_ergebnisse.csv"):
+        # Datei erstellen und Daten speichern
+        df.to_csv("umfrage_ergebnisse.csv", index=False)
+    else:
+        # Daten anhängen
+        df.to_csv("umfrage_ergebnisse.csv", mode="a", header=False, index=False)
+
 # Prüfung der Gesamtpunktzahl und entsprechende Meldung
 if not fehler:
     if vergebene_punkte != 10:
         st.error(f"Die Gesamtpunktzahl muss genau 10 betragen. Aktuell vergeben: {vergebene_punkte} Punkte.")
     else:
         st.success(f"Sie haben genau 10 Punkte korrekt vergeben!")
+        save_data(selected_age_group, selected_gender, selected_partei, negativ_partei, punkte_verteilung)
+        st.write("Die Ergebnisse wurden erfolgreich gespeichert!")
 
+# Button zum Anzeigen der Ergebnisse
+if st.button("Ergebnisse anzeigen"):
+    if os.path.isfile("umfrage_ergebnisse.csv"):
+        # CSV-Datei laden
+        df = pd.read_csv("umfrage_ergebnisse.csv")
+        st.write(df)
+    else:
+        st.write("Noch keine Ergebnisse gespeichert.")
