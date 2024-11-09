@@ -60,29 +60,12 @@ else:
 # Überschrift für die Punktevergabe (verschoben auf Punkt 5)
 st.subheader("5. So würde ich meine Punkte verteilen:")
 
-# Farbenliste für die Parteien
-farben = [
-    "#61c3ce",  # ÖVP - Türkis
-    "#e02a12",  # SPÖ - Rot
-    "#115093",  # FPÖ - Blau
-    "#74a201",  # GRÜNE - Grün
-    "#c21d62",  # NEOS - Pink
-    "#ffea00",  # BIER - Gelb
-    "#fe5826",  # MFG - Türkis
-    "#fcfbe6",  # BGE - Hellblau
-    "#4d194a",  # LMP - Orange
-    "#a5dcb4",  # GAZA - Grau
-    "#e70037",  # KPÖ - Dunkelrot
-    "#ff9273"   # KEINE - Dunkelgrau
-]
-
 # Erstellen von Spalten für die Eingabefelder
 punkte_verteilung = []
 columns = st.columns(len(parteien) - 1)  # -1, da "Keine Angabe" keine Punkte bekommt
-max_punkte_fuer_partei = 0
 
 # Schleife durch Parteien (ohne "Keine Angabe")
-for i, partei in enumerate(parteien[1:]):  # Beginne bei der ersten echten Partei
+for i, partei in enumerate(parteien[1:]):
     with columns[i]:
         punkte = st.number_input(f"{partei}", min_value=0, max_value=10, step=1, key=partei)
         punkte_verteilung.append((partei, punkte))
@@ -94,55 +77,3 @@ vergebene_punkte = sum(punkte for _, punkte in punkte_verteilung)
 fehler = False
 
 # 1. Überprüfung: Punkte für die abgelehnte Partei
-for partei, punkte in punkte_verteilung:
-    if partei == negativ_partei and punkte > 0:
-        st.error(f"Der Partei '{negativ_partei}' dürfen keine Punkte zugewiesen werden.")
-        fehler = True
-
-# 2. Überprüfung: Keine Partei darf mehr Punkte bekommen als die bevorzugte Partei
-if selected_partei != "Keine Angabe":
-    max_punkte_fuer_partei = next(punkte for partei, punkte in punkte_verteilung if partei == selected_partei)
-    for partei, punkte in punkte_verteilung:
-        if partei != selected_partei and punkte > max_punkte_fuer_partei:
-            st.error(f"Die Partei '{partei}' darf nicht mehr Punkte bekommen als die bevorzugte Partei '{selected_partei}'.")
-            fehler = True
-
-# Funktion zum Speichern der Daten in einer CSV-Datei
-def save_data(age_group, gender, selected_partei, negativ_partei, punkte_verteilung):
-    # Daten als Dictionary vorbereiten
-    data = {
-        "Altersgruppe": age_group,
-        "Geschlecht": gender,
-        "Bevorzugte Partei": selected_partei,
-        "Negativstimme": negativ_partei,
-        **{partei: punkte for partei, punkte in punkte_verteilung}  # Punkteverteilung als Schlüssel-Wert-Paare
-    }
-    
-    # DataFrame erstellen
-    df = pd.DataFrame([data])
-    
-    # Überprüfen, ob die Datei existiert
-    if not os.path.isfile("umfrage_ergebnisse.csv"):
-        # Datei erstellen und Daten speichern
-        df.to_csv("umfrage_ergebnisse.csv", index=False)
-    else:
-        # Daten anhängen
-        df.to_csv("umfrage_ergebnisse.csv", mode="a", header=False, index=False)
-
-# Prüfung der Gesamtpunktzahl und entsprechende Meldung
-if not fehler:
-    if vergebene_punkte != 10:
-        st.error(f"Die Gesamtpunktzahl muss genau 10 betragen. Aktuell vergeben: {vergebene_punkte} Punkte.")
-    else:
-        st.success(f"Sie haben genau 10 Punkte korrekt vergeben!")
-        save_data(selected_age_group, selected_gender, selected_partei, negativ_partei, punkte_verteilung)
-        st.write("Die Ergebnisse wurden erfolgreich gespeichert!")
-
-# Button zum Anzeigen der Ergebnisse
-if st.button("Ergebnisse anzeigen"):
-    if os.path.isfile("umfrage_ergebnisse.csv"):
-        # CSV-Datei laden
-        df = pd.read_csv("umfrage_ergebnisse.csv")
-        st.write(df)
-    else:
-        st.write("Noch keine Ergebnisse gespeichert.")
